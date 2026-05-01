@@ -8,14 +8,14 @@ class TextType(Enum):
     IMAGE = "image"
 
 class TextNode:
-    def __init__(self, text, text_type, url):
+    def __init__(self, text, text_type, url=None):
         self.text = text
         self.text_type = text_type
         self.url = url
 
     def __eq__(self, text_node):
-        if (text_node.text == self.text &
-            text_node.text_type == self.text_type &
+        if (text_node.text == self.text and
+            text_node.text_type == self.text_type and
             text_node.url ==  self.url):
             return True
         return False
