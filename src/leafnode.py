@@ -1,0 +1,21 @@
+from htmlnode import HTMLNode
+
+class LeafNode(HTMLNode):
+
+    def __init__(self, value, tag, props=None):
+        super().__init__(value, tag, None, props)
+
+    def to_html(self):
+        if self.value is None:
+            raise ValueError("invalid HTML: no value")
+        if self.tag is None:
+            return self.value
+        return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
+    
+    def __repr__(self):
+        rep = "LeafNode:\n"
+        rep += f"tag={self.tag}\n"
+        rep += f"value={self.value}\n"
+        rep += f"props={self.props}\n"
+
+        return rep
