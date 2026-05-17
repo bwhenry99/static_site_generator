@@ -1,8 +1,7 @@
-from textnode import TextNode, TextType
+import copytopublic
 
 def main():
-    test = TextNode("dummy text", TextType.LINK, "this is a url")
-    print(test)
+    copytopublic.copy_files_to_dir("./static", "./public")
 
 
 if __name__ == "__main__":
