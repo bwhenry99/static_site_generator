@@ -8,7 +8,6 @@ def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
     parent = ParentNode("div", [], None)
     for block in blocks:
-        print(block)
         blockType = block_to_block_type(block)
 
         match blockType:
@@ -70,8 +69,6 @@ def markdown_to_html_node(markdown):
 
     return parent
 
-
-
 def text_to_children(text):
     text_nodes = text_to_text_nodes(text)
     children = []
@@ -79,3 +76,10 @@ def text_to_children(text):
         html_node = text_node_to_html_node(text_node)
         children.append(html_node)
     return children
+
+def extract_title(markdown):
+    lines = markdown.split('\n')
+    for line in lines:
+        if line.startswith("# "):
+            return line[2:]
+    raise Exception("No Title")
