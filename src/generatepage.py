@@ -10,11 +10,18 @@ def generate_page(from_path, template_path, dest_path):
     html = markdowntohtml.markdown_to_html_node(markdown).to_html()
     title = markdowntohtml.extract_title(markdown)
 
-    print(template)
     template = template.replace("{{ Title }}", title)
-    print(template)
     template = template.replace("{{ Content }}", html)
 
     dest_file = open(dest_path, mode='w')
     dest_file.write(template)
 
+def generate_pages_recursive(dir_path_content, template_path, dest_path):
+    print(os.listdir(dir_path_content))
+    for item in os.listdir(dir_path_content):
+        filepath = os.path.join(dir_path_content, item)
+        if(os.path.isfile(filepath) and filepath.endswith(".md")):
+            generate_page(filepath, template_path, os.path.join(dest_path, item[:-2] + "html"))
+        else:
+            os.mkdir(os.path.join(dest_path, item))
+            generate_pages_recursive(filepath, template_path, os.path.join(dest_path, item))
